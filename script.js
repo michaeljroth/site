@@ -46,7 +46,7 @@ const adjust = {
     94: 0.742401020408164,
 };
 
-const membraneCalc = function membCalc() {
+function membCalc() {
     const membGPD = document.getElementById("membGPD").value;
     const membPSI = document.getElementById("membPSI").value;
     const housePSI = document.getElementById("housePSI").value;
@@ -54,11 +54,16 @@ const membraneCalc = function membCalc() {
     const pressAdj = (parseInt(membGPD)*((housePSI/membPSI)-1));
     const tempAdj = ((parseInt(membGPD)/(adjust[houseTemp]))-parseInt(membGPD));
     const finalGPD = parseInt(membGPD) + Math.round(pressAdj) + Math.round(tempAdj);
-    document.getElementById("final").innerHTML = "Your GPD is: " + finalGPD;
-    document.getElementById("answer").style.display = "block";
+    if (isNaN(finalGPD) == true) {
+            document.getElementById("final").innerHTML = "You need a booster pump.";
+            document.getElementById("answer").style.display = "block";
+    }   else  {
+            document.getElementById("final").innerHTML = "Your GPD is: " + finalGPD;
+            document.getElementById("answer").style.display = "block";
+    };
 };
 
-const resetForm = function (reset) {
+function reset() {
     document.getElementById("answer").style.display = "none";
     document.getElementById("formID").reset();
 };
