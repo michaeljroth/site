@@ -48,12 +48,19 @@ const adjust = {
 
 function membCalc() {
     const membGPD = document.getElementById("membGPD").value;
-    const membPSI = document.getElementById("membPSI").value;
+
+    if (membGPD == 150) {
+        var membPSI = 65;
+    } else {
+        var membPSI = 50;
+    };
+
     const housePSI = document.getElementById("housePSI").value;
     const houseTemp = document.getElementById("houseTemp").value;
     const pressAdj = (parseInt(membGPD)*((housePSI/membPSI)-1));
     const tempAdj = ((parseInt(membGPD)/(adjust[houseTemp]))-parseInt(membGPD));
     const finalGPD = parseInt(membGPD) + Math.round(pressAdj) + Math.round(tempAdj);
+    
     if (isNaN(finalGPD) == true) {
             document.getElementById("final").innerHTML = "You need a booster pump.";
             document.getElementById("answer").style.display = "block";
@@ -63,7 +70,7 @@ function membCalc() {
     };
 };
 
-function reset() {
-    document.getElementById("answer").style.display = "none";
-    document.getElementById("formID").reset();
+function resetForm() {
+  document.getElementById("answer").style.display = "none";
+  document.getElementById("formID").reset();
 };
